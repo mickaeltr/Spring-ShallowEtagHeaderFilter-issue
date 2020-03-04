@@ -49,7 +49,7 @@ class DemoControllerTest {
 
     @Test
     void stream_not_modified() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/demo/stream"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/demo/stream").header(HttpHeaders.IF_NONE_MATCH, "\"demo\""))
                 .andExpect(MockMvcResultMatchers.status().isNotModified())
                 .andExpect(MockMvcResultMatchers.header().string(HttpHeaders.CONTENT_TYPE, MediaType.TEXT_PLAIN_VALUE))
                 .andExpect(MockMvcResultMatchers.header().longValue(HttpHeaders.CONTENT_LENGTH, 123))
